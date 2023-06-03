@@ -18,7 +18,7 @@ struct SwiftTom: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://tprezioso.github.io/SwiftTom/")!
+    var url = URL(string: "https://tprezioso.github.io/")!
     var name = "SwiftTom"
     var description = ""
     var language: Language { .english }
@@ -41,11 +41,7 @@ try SwiftTom().publish(using: [
             config: config
         )
     },
-    .deploy(using: .gitHub(
-        "Tprezioso/SwiftTom",
-        branch: "main",
-        useSSH: false)
-    ),
+    .deploy(using: .gitHub("Tprezioso/SwiftTom")),
     .generateSiteMap()
     
   ])
