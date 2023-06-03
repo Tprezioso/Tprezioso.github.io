@@ -42,6 +42,7 @@ try SwiftTom().publish(using: [
             config: config
         )
     },
+    PublishingStep<SwiftTom>
     .generateSiteMap()
   ])
     
