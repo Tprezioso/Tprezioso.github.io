@@ -43,11 +43,6 @@ try SwiftTom().publish(using: [
         )
     },
     .generateSiteMap(),
-    .deploy(using: .gitHub(
-                "tprezioso/SwiftTom/",
-                branch: "main",
-                useSSH: false)
-            )
 //    .deploy(using: .gitHub(
 //                "Tprezioso/SwiftTom/",
 //                branch: "main",
