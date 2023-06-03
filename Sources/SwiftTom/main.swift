@@ -44,10 +44,15 @@ try SwiftTom().publish(using: [
     },
     .generateSiteMap(),
     .deploy(using: .gitHub(
-                "https://tprezioso.github.io/SwiftTom/",
+                "tprezioso/SwiftTom/",
                 branch: "main",
                 useSSH: false)
             )
+//    .deploy(using: .gitHub(
+//                "Tprezioso/SwiftTom/",
+//                branch: "main",
+//                useSSH: false)
+//            )
   ])
     
     
