@@ -42,8 +42,12 @@ try SwiftTom().publish(using: [
             config: config
         )
     },
-    PublishingStep<SwiftTom>
-    .generateSiteMap()
+    .generateSiteMap(),
+    .deploy(using: .gitHub(
+                "https://tprezioso.github.io/SwiftTom/",
+                branch: "main",
+                useSSH: false)
+            )
   ])
     
     
