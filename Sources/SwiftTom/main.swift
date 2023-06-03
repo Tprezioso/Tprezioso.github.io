@@ -18,7 +18,7 @@ struct SwiftTom: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://your-website-url.com")!
+    var url = URL(string: "https://tprezioso.github.io/SwiftTom/")!
     var name = "SwiftTom"
     var description = ""
 //    var description = "Hi! My name is Tom, I am a self taught programmer that has been programming since 2015. This blog is to help teach swift programming topics to anyone who wants to learn how to program in swift. Topics covered on this blog will range from beginner to experienced. Come join me in learning all about the amazing programming language that is swift!"
