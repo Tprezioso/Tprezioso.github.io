@@ -20,8 +20,8 @@ public extension Theme where Site == SwiftTom {
     }
 }
 
-private struct MyThemeHTMLFactory: HTMLFactory {
-    func makeIndexHTML(for index: Index,
+public struct MyThemeHTMLFactory: HTMLFactory {
+    public func makeIndexHTML(for index: Index,
                        context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -46,7 +46,7 @@ private struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    func makeSectionHTML(for section: Section<SwiftTom>,
+   public func makeSectionHTML(for section: Section<SwiftTom>,
                          context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -62,7 +62,7 @@ private struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    func makeItemHTML(for item: Item<SwiftTom>,
+    public func makeItemHTML(for item: Item<SwiftTom>,
                       context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -84,7 +84,7 @@ private struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    func makePageHTML(for page: Page,
+    public func makePageHTML(for page: Page,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -97,7 +97,7 @@ private struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    func makeTagListHTML(for page: TagListPage,
+   public func makeTagListHTML(for page: TagListPage,
                          context: PublishingContext<SwiftTom>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
@@ -121,7 +121,7 @@ private struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    func makeTagDetailsHTML(for page: TagDetailsPage,
+    public func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<SwiftTom>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
