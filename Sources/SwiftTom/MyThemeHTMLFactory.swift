@@ -143,7 +143,7 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
     }
 }
 
-public struct Wrapper: ComponentContainer {
+ struct Wrapper: ComponentContainer {
     @ComponentBuilder var content: ContentProvider
 
     var body: Component {
@@ -151,7 +151,7 @@ public struct Wrapper: ComponentContainer {
     }
 }
 
-public struct SiteHeader<Site: Website>: Component {
+ struct SiteHeader<Site: Website>: Component {
     var context: PublishingContext<Site>
     var selectedSelectionID: Site.SectionID?
 
@@ -174,7 +174,7 @@ public struct SiteHeader<Site: Website>: Component {
         }
     }
 
-    public var navigation: Component {
+     var navigation: Component {
         Navigation {
             List(Site.SectionID.allCases) { sectionID in
                 let section = context.sections[sectionID]
@@ -188,11 +188,11 @@ public struct SiteHeader<Site: Website>: Component {
     }
 }
 
-public struct ItemList<Site: Website>: Component {
+ struct ItemList<Site: Website>: Component {
     var items: [Item<Site>]
     var site: Site
 
-    public var body: Component {
+    var body: Component {
         List(items) { item in
             Article {
                 H1(Link(item.title, url: item.path.absoluteString))
@@ -205,11 +205,11 @@ public struct ItemList<Site: Website>: Component {
     }
 }
 
-public struct ItemTagList<Site: Website>: Component {
+ struct ItemTagList<Site: Website>: Component {
     var item: Item<Site>
     var site: Site
 
-    public var body: Component {
+    var body: Component {
         List(item.tags) { tag in
             Link(tag.string, url: site.path(for: tag).absoluteString)
         }
@@ -217,8 +217,8 @@ public struct ItemTagList<Site: Website>: Component {
     }
 }
 
-public struct SiteFooter: Component {
-    public var body: Component {
+ struct SiteFooter: Component {
+    var body: Component {
         Footer {
             Paragraph {
                 Text("Generated using ")
