@@ -74,7 +74,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
     }
 
     public func makePageHTML(for page: Page,
-                      context: PublishingContext<Site>) throws -> HTML {
+                      context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -151,9 +151,9 @@ public struct MyThemeHTMLFactory: HTMLFactory {
     }
 }
 
- struct SiteHeader<Site: Website>: Component {
-    var context: PublishingContext<Site>
-    var selectedSelectionID: Site.SectionID?
+ struct SiteHeader: Component {
+    var context: PublishingContext<SwiftTom>
+    var selectedSelectionID: SwiftTom.SectionID?
 
     var body: Component {
         Header {
@@ -165,7 +165,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
                 Link(context.site.name, url: "/")
                     .class("site-name")
 
-                if Site.SectionID.allCases.count > 1 {
+                if SwiftTom.SectionID.allCases.count > 1 {
                     navigation
                 }
                     
@@ -176,7 +176,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
 
      var navigation: Component {
         Navigation {
-            List(Site.SectionID.allCases) { sectionID in
+            List(SwiftTom.SectionID.allCases) { sectionID in
                 let section = context.sections[sectionID]
 
                 return Link(section.title,
