@@ -43,9 +43,5 @@ try SwiftTom().publish(using: [
     },
     .deploy(using: .gitHub("tprezioso/swifttom")
     ),
-    .generateSiteMap()
-    
+    .generateSiteMap()    
   ])
-    
-    
-//    .publish(withTheme: .myTheme)
