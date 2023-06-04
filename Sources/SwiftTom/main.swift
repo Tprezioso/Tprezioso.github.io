@@ -4,8 +4,8 @@ import Plot
 import SplashPublishPlugin
 
 // This type acts as the configuration for your website.
-struct SwiftTom: Website {
-    enum SectionID: String, WebsiteSectionID {
+public struct SwiftTom: Website {
+    public enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
         case posts
         case about
@@ -13,16 +13,16 @@ struct SwiftTom: Website {
         case contact
     }
 
-    struct ItemMetadata: WebsiteItemMetadata {
+    public struct ItemMetadata: WebsiteItemMetadata {
         // Add any site-specific metadata that you want to use here.
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://www.tprezioso.github.io/swifttom/")!
-    var name = "SwiftTom"
-    var description = ""
-    var language: Language { .english }
-    var imagePath: Path? { nil }
+    public var url = URL(string: "https://www.tprezioso.github.io/swifttom/")!
+    public var name = "SwiftTom"
+    public var description = ""
+    public var language: Language { .english }
+    public var imagePath: Path? { nil }
 }
 
 
