@@ -34,7 +34,7 @@ try SwiftTom().publish(using: [
     .installPlugin(.splash(withClassPrefix: "")),
     .addMarkdownFiles(),
     .sortItems(by: \.date, order: .descending),
-    .generateHTML(withTheme: .myTheme),
+    .generateHTML(withTheme: .foundation),
     .unwrap(RSSFeedConfiguration.default) { config in
         .generateRSSFeed(
           including: [.posts],
