@@ -18,7 +18,7 @@ struct SwiftTom: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "tprezioso.github.io/swifttom/")!
+    var url = URL(string: "https://www.tprezioso.github.io/swifttom/")!
     var name = "SwiftTom"
     var description = ""
     var language: Language { .english }
