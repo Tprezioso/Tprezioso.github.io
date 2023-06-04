@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "b9601618a7f364543224abbbcc4a70bfe4fb84f470f1ee4737e9f997a98bde5e"
+build_start_time: [1685814781, 579457000]
+build_end_time: [1685814781, 762226000]
+inputs:
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/splashpublishplugin/Sources/SplashPublishPlugin/SplashPublishPlugin.swift"
+  : [1678488812, 942777194]

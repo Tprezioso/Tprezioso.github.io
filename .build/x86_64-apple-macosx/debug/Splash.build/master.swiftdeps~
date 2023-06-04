@@ -1,0 +1,41 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "236f524ca21b7c94d74a9061fe2d3df894e51d3a7898a658e140b8d3e414ebe3"
+build_start_time: [1678488815, 119673013]
+build_end_time: [1678488816, 181103944]
+inputs:
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/CharacterSet/CharacterSet+Contains.swift"
+  : [1678488813, 376323223]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Equatable/Equatable+AnyOf.swift"
+  : [1678488813, 376440525]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Int/Int+IsOdd.swift": [1678488813, 376543998]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Sequence/Sequence+AnyOf.swift"
+  : [1678488813, 376649379]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Sequence/Sequence+Occurrences.swift"
+  : [1678488813, 376718044]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Strings/String+HTMLEntities.swift"
+  : [1678488813, 376820087]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Strings/String+IsNumber.swift"
+  : [1678488813, 376887321]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Strings/String+PrefixChecking.swift"
+  : [1678488813, 376946449]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Strings/String+Removing.swift"
+  : [1678488813, 377011060]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Extensions/Strings/Substring+HasSuffix.swift"
+  : [1678488813, 377078533]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Grammar/Grammar.swift": [1678488813, 377185821]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Grammar/SwiftGrammar.swift": [1678488813, 377328872]
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Output/AttributedStringOutputFormat.swift"
+  : [1678488813, 377461910]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Output/HTMLOutputFormat.swift": [1678488813, 377551555]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Output/MarkdownDecorator.swift": [1678488813, 377633094]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Output/OutputBuilder.swift": [1678488813, 377700328]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Output/OutputFormat.swift": [1678488813, 377765178]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Syntax/SyntaxHighlighter.swift": [1678488813, 377880573]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Syntax/SyntaxRule.swift": [1678488813, 377948999]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Theming/Color.swift": [1678488813, 378054618]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Theming/Font.swift": [1678488813, 378131628]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Theming/Theme+Defaults.swift": [1678488813, 378220081]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Theming/Theme.swift": [1678488813, 378298282]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Tokenizing/Segment.swift": [1678488813, 378407955]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Tokenizing/TokenType.swift": [1678488813, 378483772]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/Splash/Sources/Splash/Tokenizing/Tokenizer.swift": [1678488813, 378582954]

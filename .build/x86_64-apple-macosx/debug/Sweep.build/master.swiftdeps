@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "3fe3a708984bb20530fc0ea2a02f5108a6f4a3f392e0635b47884c82b9803d2e"
+build_start_time: [1685887789, 633555000]
+build_end_time: [1685887789, 764956000]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/sweep/Sources/Sweep/Sweep.swift": [1666829292, 154502494]

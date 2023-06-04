@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "39ee9bb28a898e4763a8c1e6340005e7626f3b0869e56391696299caa3a96522"
+build_start_time: [1685887789, 628744000]
+build_end_time: [1685887789, 761639000]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/shellout/Sources/ShellOut.swift": [1666829291, 121218125]

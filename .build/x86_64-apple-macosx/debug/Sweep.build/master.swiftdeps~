@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "dc76b56eae5b8fc2131a49ed7d95ac4e06e0abee6313a31c768b5d86c6c87053"
+build_start_time: [1666829298, 96845149]
+build_end_time: [1666829303, 618556022]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/sweep/Sources/Sweep/Sweep.swift": [1666829292, 154502391]

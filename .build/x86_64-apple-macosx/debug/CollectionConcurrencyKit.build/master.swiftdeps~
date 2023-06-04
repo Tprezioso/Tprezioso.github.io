@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "b0855bc2597fcbaa923c4b3dac4a108a122e1fe322a85f0df54e6f4b3d92e4ac"
+build_start_time: [1666829298, 94944000]
+build_end_time: [1666829298, 961855888]
+inputs:
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/collectionConcurrencyKit/Sources/CollectionConcurrencyKit.swift"
+  : [1666829290, 655580520]

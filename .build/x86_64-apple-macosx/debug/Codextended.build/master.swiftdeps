@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "c14ad6414acab89a5c3f863ebc02ed401d00a54999b895a335e097cfe274b183"
+build_start_time: [1685887789, 630533000]
+build_end_time: [1685887789, 755010000]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/codextended/Sources/Codextended/Codextended.swift": [1666829292, 473800084]

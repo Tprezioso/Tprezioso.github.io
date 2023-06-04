@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "3a5d82297d0f58b920e0dc610345f89e553f39501c9d5d7cddb03b43d8e8675a"
+build_start_time: [1666829310, 791993141]
+build_end_time: [1666829311, 104702949]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/Sources/SwiftTom/main.swift": [1666828119, 688654422]

@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "82ee9ccc34cb6942c8854af3dbf133c77676021e454f53a6735f9e46c864a0d1"
+build_start_time: [1666829298, 78021049]
+build_end_time: [1666829303, 584925174]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/codextended/Sources/Codextended/Codextended.swift": [1666829292, 473800182]

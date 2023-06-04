@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "9f535c546fd346c4e2414e24478e50dad081c7172e6e40e938512ada5fed2581"
+build_start_time: [1666829298, 95313072]
+build_end_time: [1666829303, 654989004]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/shellout/Sources/ShellOut.swift": [1666829291, 121218204]

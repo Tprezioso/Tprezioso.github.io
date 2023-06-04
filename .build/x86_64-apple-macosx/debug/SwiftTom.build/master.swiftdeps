@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "5b0b50dbdf03fc3fa7775d3fcf3cdc1a4c71aaf1f2e324386a8b37eb3de18a96"
+build_start_time: [1685891241, 90494000]
+build_end_time: [1685891242, 225905000]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/Sources/SwiftTom/MyThemeHTMLFactory.swift": [1685889387, 604076632]
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/Sources/SwiftTom/main.swift": [1685888604, 183099675]

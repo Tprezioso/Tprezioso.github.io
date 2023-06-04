@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "7de9eccb8fed017a2e69a3b6a417972318123c7f0a3c64fe3c366ce9dfecad4b"
+build_start_time: [1666829298, 79122066]
+build_end_time: [1666829304, 577190876]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/files/Sources/Files.swift": [1666829291, 448736190]

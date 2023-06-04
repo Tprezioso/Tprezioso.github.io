@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/master.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/Sources/SwiftTom/MyThemeHTMLFactory.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/MyThemeHTMLFactory.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/MyThemeHTMLFactory.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/MyThemeHTMLFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/MyThemeHTMLFactory.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/Sources/SwiftTom/main.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/main.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/main.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/x86_64-apple-macosx/debug/SwiftTom.build/main.swiftdeps"
+  }
+}

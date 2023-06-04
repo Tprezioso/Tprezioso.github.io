@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "f2b9c045fec0a5d24a7c55cb8f342c0ba0bf4e9d03b13f48ca1ac9f6622ef656"
+build_start_time: [1685887789, 628485000]
+build_end_time: [1685887789, 770199000]
+inputs:
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/files/Sources/Files.swift": [1666829291, 448736107]

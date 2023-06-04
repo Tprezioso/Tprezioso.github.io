@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "524bb279ea59949886173156fdc1fafa72ce4c4e2b43129e294cedb3ab4882c9"
+build_start_time: [1685887789, 631762000]
+build_end_time: [1685887789, 754702000]
+inputs:
+  ? "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/checkouts/collectionConcurrencyKit/Sources/CollectionConcurrencyKit.swift"
+  : [1666829290, 655580508]

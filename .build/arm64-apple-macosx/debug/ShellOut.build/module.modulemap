@@ -1,0 +1,4 @@
+module ShellOut {
+    header "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftTom/.build/arm64-apple-macosx/debug/ShellOut.build/ShellOut-Swift.h"
+    requires objc
+}
