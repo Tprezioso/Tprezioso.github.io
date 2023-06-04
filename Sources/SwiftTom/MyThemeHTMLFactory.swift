@@ -9,7 +9,7 @@ import Plot
 import Publish
 import Foundation
 
-public extension Theme {
+ extension Theme where Site == SwiftTom {
     /// The default "Foundation" theme that Publish ships with, a very
     /// basic theme mostly implemented for demonstration purposes.
     static var myTheme: Self {
@@ -20,9 +20,9 @@ public extension Theme {
     }
 }
 
-private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
+private struct MyThemeHTMLFactory: HTMLFactory {
     func makeIndexHTML(for index: Index,
-                       context: PublishingContext<Site>) throws -> HTML {
+                       context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site),
@@ -46,8 +46,8 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeSectionHTML(for section: Section<Site>,
-                         context: PublishingContext<Site>) throws -> HTML {
+    func makeSectionHTML(for section: Section<SwiftTom>,
+                         context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: section, on: context.site),
@@ -62,8 +62,8 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeItemHTML(for item: Item<Site>,
-                      context: PublishingContext<Site>) throws -> HTML {
+    func makeItemHTML(for item: Item<SwiftTom>,
+                      context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: item, on: context.site),
@@ -98,7 +98,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeTagListHTML(for page: TagListPage,
-                         context: PublishingContext<Site>) throws -> HTML? {
+                         context: PublishingContext<SwiftTom>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -122,7 +122,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeTagDetailsHTML(for page: TagDetailsPage,
-                            context: PublishingContext<Site>) throws -> HTML? {
+                            context: PublishingContext<SwiftTom>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
