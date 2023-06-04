@@ -9,19 +9,8 @@ import Plot
 import Publish
 import Foundation
 
-public extension Theme where Site == SwiftTom {
-    /// The default "Foundation" theme that Publish ships with, a very
-    /// basic theme mostly implemented for demonstration purposes.
-    static var myTheme: Self {
-        Theme(
-            htmlFactory: MyThemeHTMLFactory(),
-            resourcePaths: ["Resources/MyTheme/styles.css"]
-        )
-    }
-}
-
-private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
-    func makeIndexHTML(for index: Index,
+public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
+    public func makeIndexHTML(for index: Index,
                        context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -46,7 +35,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeSectionHTML(for section: Section<Site>,
+    public func makeSectionHTML(for section: Section<Site>,
                          context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -62,7 +51,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeItemHTML(for item: Item<Site>,
+    public func makeItemHTML(for item: Item<Site>,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -84,7 +73,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makePageHTML(for page: Page,
+    public func makePageHTML(for page: Page,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -97,7 +86,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeTagListHTML(for page: TagListPage,
+    public func makeTagListHTML(for page: TagListPage,
                          context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
@@ -121,7 +110,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeTagDetailsHTML(for page: TagDetailsPage,
+    public func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),

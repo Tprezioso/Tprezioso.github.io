@@ -44,3 +44,15 @@ try SwiftTom().publish(using: [
     .generateSiteMap(),
     .deploy(using: .gitHub("tprezioso/swifttom"))
   ])
+
+
+public extension Theme where Site == SwiftTom {
+    /// The default "Foundation" theme that Publish ships with, a very
+    /// basic theme mostly implemented for demonstration purposes.
+    static var myTheme: Self {
+        Theme(
+            htmlFactory: MyThemeHTMLFactory(),
+            resourcePaths: ["Resources/MyTheme/styles.css"]
+        )
+    }
+}
