@@ -41,7 +41,6 @@ try SwiftTom().publish(using: [
             config: config
         )
     },
-    .deploy(using: .gitHub("tprezioso/swifttom")
-    ),
-    .generateSiteMap()    
+    .generateSiteMap(),
+    .deploy(using: .gitHub("tprezioso/swifttom"))
   ])
