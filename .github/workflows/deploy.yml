@@ -24,5 +24,5 @@ jobs:
       - name: Build Publish site
         run: publish generate
 
-      - name: Push Output folder to a git subtree for automatic deployment
-	    run: git push origin `git subtree split --prefix Output main`:production --force
+      - name: Push Output folder
+	run: git push origin `git subtree split --prefix Output main`:production --force
