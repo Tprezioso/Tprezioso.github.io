@@ -170,3 +170,9 @@ footer {
         background-color: #000;
     }
 }
+
+@media(max-width: 400px) {
+    .wrapper {
+        padding: 40px 20px;
+    }
+}
