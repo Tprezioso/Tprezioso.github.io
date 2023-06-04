@@ -9,7 +9,7 @@ import Plot
 import Publish
 import Foundation
 
-public extension Theme {
+public extension Theme where Site == SwiftTom {
     /// The default "Foundation" theme that Publish ships with, a very
     /// basic theme mostly implemented for demonstration purposes.
     static var myTheme: Self {
