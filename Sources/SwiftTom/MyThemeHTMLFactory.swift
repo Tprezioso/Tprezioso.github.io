@@ -9,9 +9,9 @@ import Plot
 import Publish
 import Foundation
 
-public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
+public struct MyThemeHTMLFactory: HTMLFactory {
     public func makeIndexHTML(for index: Index,
-                       context: PublishingContext<Site>) throws -> HTML {
+                       context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site),
@@ -35,8 +35,8 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    public func makeSectionHTML(for section: Section<Site>,
-                         context: PublishingContext<Site>) throws -> HTML {
+    public func makeSectionHTML(for section: Section<SwiftTom>,
+                         context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: section, on: context.site),
@@ -51,8 +51,8 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    public func makeItemHTML(for item: Item<Site>,
-                      context: PublishingContext<Site>) throws -> HTML {
+    public func makeItemHTML(for item: Item<SwiftTom>,
+                      context: PublishingContext<SwiftTom>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: item, on: context.site),
@@ -87,7 +87,7 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     public func makeTagListHTML(for page: TagListPage,
-                         context: PublishingContext<Site>) throws -> HTML? {
+                         context: PublishingContext<SwiftTom>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -111,7 +111,7 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     public func makeTagDetailsHTML(for page: TagDetailsPage,
-                            context: PublishingContext<Site>) throws -> HTML? {
+                            context: PublishingContext<SwiftTom>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
