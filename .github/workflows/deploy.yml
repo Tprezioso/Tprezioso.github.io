@@ -25,4 +25,5 @@ jobs:
         run: publish generate
 
       - name: Push Output folder
-	run: git push origin `git subtree split --prefix Output main`:production --force
+        run: git push origin `git subtree split --prefix Output main`:production --force
+
