@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug SwiftTom",
+            "program": "${workspaceFolder:SwiftTom}/.build/debug/SwiftTom",
+            "args": [],
+            "cwd": "${workspaceFolder:SwiftTom}",
+            "preLaunchTask": "swift: Build Debug SwiftTom"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release SwiftTom",
+            "program": "${workspaceFolder:SwiftTom}/.build/release/SwiftTom",
+            "args": [],
+            "cwd": "${workspaceFolder:SwiftTom}",
+            "preLaunchTask": "swift: Build Release SwiftTom"
+        }
+    ]
+}
