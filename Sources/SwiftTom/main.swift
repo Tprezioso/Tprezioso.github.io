@@ -51,7 +51,7 @@ public extension Theme where Site == SwiftTom {
     /// basic theme mostly implemented for demonstration purposes.
     static var myTheme: Self {
         Theme(
-            htmlFactory: MyThemeHTMLFactory<SwiftTom>(),
+            htmlFactory: MyThemeHTMLFactory(),
             resourcePaths: ["Resources/MyTheme/styles.css"]
         )
     }
