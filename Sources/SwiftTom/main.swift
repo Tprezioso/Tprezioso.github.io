@@ -22,7 +22,7 @@ public struct SwiftTom: Website {
     public var name = "SwiftTom"
     public var description = ""
     public var language: Language { .english }
-    public var imagePath: Path? { Path("images/tom.jpg") }
+    public var imagePath: Path? { nil }
 }
 
 
