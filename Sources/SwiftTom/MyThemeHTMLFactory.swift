@@ -9,9 +9,9 @@ import Plot
 import Publish
 import Foundation
 
-public struct MyThemeHTMLFactory: HTMLFactory {
+public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
     public func makeIndexHTML(for index: Index,
-                       context: PublishingContext<SwiftTom>) throws -> HTML {
+                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site),
@@ -35,8 +35,8 @@ public struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    public func makeSectionHTML(for section: Section<SwiftTom>,
-                         context: PublishingContext<SwiftTom>) throws -> HTML {
+    public func makeSectionHTML(for section: Section<Site>,
+                         context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: section, on: context.site),
@@ -51,8 +51,8 @@ public struct MyThemeHTMLFactory: HTMLFactory {
         )
     }
 
-    public func makeItemHTML(for item: Item<SwiftTom>,
-                      context: PublishingContext<SwiftTom>) throws -> HTML {
+    public func makeItemHTML(for item: Item<Site>,
+                      context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: item, on: context.site),
@@ -74,7 +74,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
     }
 
     public func makePageHTML(for page: Page,
-                      context: PublishingContext<SwiftTom>) throws -> HTML {
+                      context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -87,7 +87,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
     }
 
     public func makeTagListHTML(for page: TagListPage,
-                         context: PublishingContext<SwiftTom>) throws -> HTML? {
+                         context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -111,7 +111,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
     }
 
     public func makeTagDetailsHTML(for page: TagDetailsPage,
-                            context: PublishingContext<SwiftTom>) throws -> HTML? {
+                            context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -151,9 +151,9 @@ public struct MyThemeHTMLFactory: HTMLFactory {
     }
 }
 
- struct SiteHeader: Component {
-    var context: PublishingContext<SwiftTom>
-    var selectedSelectionID: SwiftTom.SectionID?
+ struct SiteHeader<Site: Website>: Component {
+    var context: PublishingContext<Site>
+    var selectedSelectionID: Site.SectionID?
 
     var body: Component {
         Header {
@@ -165,7 +165,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
                 Link(context.site.name, url: "/")
                     .class("site-name")
 
-                if SwiftTom.SectionID.allCases.count > 1 {
+                if Site.SectionID.allCases.count > 1 {
                     navigation
                 }
                     
@@ -176,7 +176,7 @@ public struct MyThemeHTMLFactory: HTMLFactory {
 
      var navigation: Component {
         Navigation {
-            List(SwiftTom.SectionID.allCases) { sectionID in
+            List(Site.SectionID.allCases) { sectionID in
                 let section = context.sections[sectionID]
 
                 return Link(section.title,
