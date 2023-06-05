@@ -18,11 +18,11 @@ public struct SwiftTom: Website {
     }
 
     // Update these properties to configure your website:
-    public var url = URL(string: "https://www.tprezioso.github.io/swifttom/")!
+    public var url = URL(string: "https://tprezioso.github.io/SwiftTom/")!
     public var name = "SwiftTom"
     public var description = ""
     public var language: Language { .english }
-    public var imagePath: Path? { Path("images") }
+    public var imagePath: Path? { Path("images/") }
 }
 
 
