@@ -157,7 +157,7 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
 
     var body: Component {
         Header {
-            Image("/images/tom.jpg")
+            Image("Images/tom.jpg")
                 .class("author-avatar")
                 
             Wrapper {
