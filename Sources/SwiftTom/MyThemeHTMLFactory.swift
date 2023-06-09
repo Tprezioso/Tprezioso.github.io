@@ -157,7 +157,7 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
 
     var body: Component {
         Header {
-            Image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fdev.to%2Ftprezioso&psig=AOvVaw0L3TNgdWhqNtF6_a3ma4mT&ust=1686365579796000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCM0ryXtf8CFQAAAAAdAAAAABAE")
+            Image(url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdev.to%2Ftprezioso&psig=AOvVaw0L3TNgdWhqNtF6_a3ma4mT&ust=1686365579796000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCM0ryXtf8CFQAAAAAdAAAAABAE", description: "Tom Prezioso")
                 .class("author-avatar")
                 
             Wrapper {
