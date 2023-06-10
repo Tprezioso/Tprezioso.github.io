@@ -16,7 +16,7 @@ public struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: index, on: context.site),
             .body {
-//                SiteHeader(context: context, selectedSelectionID: nil)
+                SiteHeader(context: context, selectedSelectionID: nil)
                 Wrapper {
                     H1(index.title)
                     Paragraph(context.site.description)
