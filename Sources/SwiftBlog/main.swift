@@ -39,7 +39,7 @@ try SwiftBlog().publish(using: [
         )
     },
     .generateSiteMap(),
-    .deploy(using: .gitHub("tprezioso/Tprezioso.github.io"))
+    .deploy(using: .gitHub("tprezioso/Tprezioso.github.io", useSSH: false))
   ])
 
 public extension Theme where Site == SwiftBlog {
