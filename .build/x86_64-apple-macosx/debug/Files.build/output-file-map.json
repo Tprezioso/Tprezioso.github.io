@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Files.build/master.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/checkouts/files/Sources/Files.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Files.build/Files.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Files.build/Files.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Files.build/Files~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Files.build/Files.swiftdeps"
+  }
+}

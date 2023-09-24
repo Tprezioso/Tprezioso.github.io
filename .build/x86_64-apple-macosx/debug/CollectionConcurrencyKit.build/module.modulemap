@@ -1,0 +1,4 @@
+module CollectionConcurrencyKit {
+    header "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/CollectionConcurrencyKit.build/CollectionConcurrencyKit-Swift.h"
+    requires objc
+}

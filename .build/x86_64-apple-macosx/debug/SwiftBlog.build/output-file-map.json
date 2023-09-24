@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/master.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/Sources/SwiftBlog/MyThemeHTMLFactory.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/MyThemeHTMLFactory.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/MyThemeHTMLFactory.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/MyThemeHTMLFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/MyThemeHTMLFactory.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/Sources/SwiftBlog/main.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/main.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/main.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/SwiftBlog.build/main.swiftdeps"
+  }
+}

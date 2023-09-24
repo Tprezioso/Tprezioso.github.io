@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Sweep.build/master.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/checkouts/sweep/Sources/Sweep/Sweep.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Sweep.build/Sweep.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Sweep.build/Sweep.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Sweep.build/Sweep~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/Sweep.build/Sweep.swiftdeps"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/CollectionConcurrencyKit.build/master.swiftdeps"
+  },
+  "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/checkouts/collectionConcurrencyKit/Sources/CollectionConcurrencyKit.swift": {
+    "dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/CollectionConcurrencyKit.build/CollectionConcurrencyKit.d",
+    "object": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/CollectionConcurrencyKit.build/CollectionConcurrencyKit.swift.o",
+    "swiftmodule": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/CollectionConcurrencyKit.build/CollectionConcurrencyKit~partial.swiftmodule",
+    "swift-dependencies": "/Users/thomaspreziosojr/Desktop/Develop/Blog/SwiftBlog/.build/x86_64-apple-macosx/debug/CollectionConcurrencyKit.build/CollectionConcurrencyKit.swiftdeps"
+  }
+}
