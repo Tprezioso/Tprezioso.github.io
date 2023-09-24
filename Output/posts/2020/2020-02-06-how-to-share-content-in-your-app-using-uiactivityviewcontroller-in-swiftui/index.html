@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta property="og:site_name" content="Another Swift Blog"/><link rel="canonical" href="https://tprezioso.github.io/posts/2020/2020-02-06-how-to-share-content-in-your-app-using-uiactivityviewcontroller-in-swiftui"/><meta name="twitter:url" content="https://tprezioso.github.io/posts/2020/2020-02-06-how-to-share-content-in-your-app-using-uiactivityviewcontroller-in-swiftui"/><meta property="og:url" content="https://tprezioso.github.io/posts/2020/2020-02-06-how-to-share-content-in-your-app-using-uiactivityviewcontroller-in-swiftui"/><title>"How to Share Content in Your App Using UIActivityViewController in SwiftUI" | Another Swift Blog</title><meta name="twitter:title" content=""How to Share Content in Your App Using UIActivityViewController in SwiftUI" | Another Swift Blog"/><meta property="og:title" content=""How to Share Content in Your App Using UIActivityViewController in SwiftUI" | Another Swift Blog"/><meta name="description" content="Another Swift Blog"/><meta name="twitter:description" content="Another Swift Blog"/><meta property="og:description" content="Another Swift Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Another Swift Blog"/></head><body class="item-page"><header><img src="images/tom.jpg" class="author-avatar"/><div class="wrapper"><a href="/" class="site-name">Another Swift Blog</a><nav><ul><li><a href="/posts" class="selected">Posts</a></li><li><a href="/about">About</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>How to Share Content in Your App Using UIActivityViewController in SwiftUI</h1><p><strong>UIActivityViewController</strong> is a class that makes sharing content to other services on your apple device super simple. All you need to do is tell it what kind of content you want to share and <strong>UIActivityViewController</strong> take care of most of the heavy lifting. Here is how to implement it.</p><p>First we need to <strong>import UIKit</strong> to get access to <strong>UIActivityViewController</strong>. Then we are going to add the following struct to our code outside of our <strong>ContentView</strong>.</p><p>struct ActivityViewController: UIViewControllerRepresentable {</p><p>var itemsToShare: [Any] var servicesToShareItem: [UIActivity]? = nil</p><p>func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: itemsToShare, applicationActivities: servicesToShareItem)
+        return controller
+    }
+
+    func updateUIViewController(\_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
+
+}
+
+What this struct is doing is setting itself as a **UIViewControllerRepresentable** so we can gain access to UIKit's classes. Next we are setting up our variables **itemsToShare** and **servicesToShareItem**. The variable **itemsToShare** is for our content that we want to pass to other services and **servicesToShareItem** is to get a list of service we can uses to share our content.
+
+Next we setup the **makeUIViewController** function. This is where we sent the context to **UIActivityViewController** so it can be displayed in SwiftUI. Then inside of the function we set our **UIActivityViewController** with the content (****itemsToShare****) and the list of services (****servicesToShareItem****) we want to display in the controller. We also added **updateUIViewController** function to keep the Controller up to date with any changes.
+
+Now we are going to go to the ContentView and add the following code.
+
+struct ContentView: View {
+    
+    @State private var isShareViewPresented: Bool = false
+    
+    var body: some View {
+        Button("Share") {
+            self.isShareViewPresented = true
+        }
+        .sheet(isPresented: $isShareViewPresented, onDismiss: {
+            print("Dismiss")
+        }, content: {
+            ActivityViewController(activityItems: \[URL(string: "https://www.swifttom.com")!\])
+        })
+    }
+    
+}
+
+First we added a @State variable to keep track of presenting our share sheet. Next we create a button called "Share" and set our **@State** property to true if the button was tapped. Then we add the **.sheet** which tracks our state property and presents or dismisses our ActivityViewController. In this example we are sharing a url to this site.
+
+When we run the code you should see something like below.
+
+![](https://swifttom.com/wp-content/uploads/2020/02/simulator-screen-shot-iphone-11-pro-2020-02-06-at-17.25.29.png?w=473)
+
+![](https://swifttom.com/wp-content/uploads/2020/02/simulator-screen-shot-iphone-11-pro-2020-02-06-at-17.25.41.png?w=473)
+
+Just note that if you want to send content like an image or a video from your photos app you need to get permission from the user. You'll need to add the following to your **Info.plist** file.
+
+- Open your **Info.plist** file.
+- Click **+** icon.
+- Choose the **Privacy - Photo Library Additions Usage Description** key.
+- Set the value to **We need access to your photos gallery**
+
+That's all there is too it! I happy coding! 👨🏻‍💻📱💻
+</p></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/swiftui">SwiftUI</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>

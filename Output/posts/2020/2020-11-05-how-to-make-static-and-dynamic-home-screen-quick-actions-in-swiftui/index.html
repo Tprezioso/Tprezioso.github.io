@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta property="og:site_name" content="Another Swift Blog"/><link rel="canonical" href="https://tprezioso.github.io/posts/2020/2020-11-05-how-to-make-static-and-dynamic-home-screen-quick-actions-in-swiftui"/><meta name="twitter:url" content="https://tprezioso.github.io/posts/2020/2020-11-05-how-to-make-static-and-dynamic-home-screen-quick-actions-in-swiftui"/><meta property="og:url" content="https://tprezioso.github.io/posts/2020/2020-11-05-how-to-make-static-and-dynamic-home-screen-quick-actions-in-swiftui"/><title>"How to Make Static and Dynamic Home Screen Quick Actions in SwiftUI" | Another Swift Blog</title><meta name="twitter:title" content=""How to Make Static and Dynamic Home Screen Quick Actions in SwiftUI" | Another Swift Blog"/><meta property="og:title" content=""How to Make Static and Dynamic Home Screen Quick Actions in SwiftUI" | Another Swift Blog"/><meta name="description" content="Another Swift Blog"/><meta name="twitter:description" content="Another Swift Blog"/><meta property="og:description" content="Another Swift Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Another Swift Blog"/></head><body class="item-page"><header><img src="images/tom.jpg" class="author-avatar"/><div class="wrapper"><a href="/" class="site-name">Another Swift Blog</a><nav><ul><li><a href="/posts" class="selected">Posts</a></li><li><a href="/about">About</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>How to Make Static and Dynamic Home Screen Quick Actions in SwiftUI</h1><img src="https://swifttom.com/wp-content/uploads/2020/11/screen-shot-2020-11-04-at-6.13.48-pm.png?w=558"/><p>Home screen quick actions are shortcuts for users to navigate into different parts of our app. In this post we are going to see how we can add these quick actions into our SwiftUI project. The two different types of quick actions we can use is <strong>static quick actions</strong> and <strong>dynamic quick actions</strong>. Let's start by taking a look at how we can add static quick actions to our project.</p><p>As the name implies <strong>static quick actions</strong> do not change. If we want to add <strong>static quick actions</strong> to our project we will need to implement it in our <strong>info.plist</strong>. If we right click on the <strong>info.plist</strong> and go to <strong>&gt; Open As &gt; Source Code</strong> and at the bottom before the last **</dict>** add the following code below.
+
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>AddAction</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeAdd</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Add</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Add Item</string>
+		</dict>
+	</array>
+
+In the code above we are using **UIApplicationShortcutItems** to create an add button for our quick action shortcuts. Our shortcut items can be found inside an array of a dictionary. In each dictionary a **UIApplicationShortcutItemType** and **UIApplicationShortcutItemTitle** are needed to make our static shortcut. **UIApplicationShortcutItemType** is a string that represents what kind of quick action we want in our app. **UIApplicationShortcutItemTitle** is the title or name of our quick action button.
+
+If you want to learn more about **UIApplicationShortcutItem**'s check out the Apple [documentation](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW36).
+
+Now if you run the app and then go to the home screen we can test our quick action. On the home screen if we tap and hold on our app icon we should see the “Add” quick action button pop up on our home screen.
+
+Now that we made a static quick action let's move on to adding a dynamic quick action button.
+
+To make a dynamic quick action we will need to add them in the **App** struct also known as the entry point of our app. This file can be located in the navigator and is usually named after your project name followed by the word **App**. In this example it will be in the **QuickActionSwuiftUIBlogApp.swift** file.
+
+The reason we need to create our quick action buttons in this file is because these buttons need to be made at specific point in the apps life cycle. Apples documentation recommends that we create dynamic quick actions when the app is moving to the background.
+
+import SwiftUI
+
+@main
+struct QuickActionSwuiftUIBlogApp: App {
+    @Environment(\\.scenePhase) var lifeCycle
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .onChange(of: lifeCycle) { (newLifeCyclePhase) in
+            switch newLifeCyclePhase {
+            case .active :
+                print("App is active")
+            case .inactive:
+                print("App is inactive")
+            case .background:
+                print("App is going to the Background")
+                // This will add our dynamic quick actions when our app is sent to the background on our device
+                addQuickActions()
+            @unknown default:
+                print("default")
+            }
+        }
+    }
+    
+    func addQuickActions() {
+        UIApplication.shared.shortcutItems = \[
+            UIApplicationShortcutItem(type: "Tweet", localizedTitle: "Tweet"),
+            UIApplicationShortcutItem(type: "Call", localizedTitle: "Call"),
+            UIApplicationShortcutItem(type: "Message", localizedTitle: "Message"),
+            UIApplicationShortcutItem(type: "Saved", localizedTitle: "Saved"),
+        \]
+    }
+}
+
+As you can see in the code above we created some dynamic shortcuts buttons in our **addQuickActions()** function. We call the **addQuickActions()** function to make our dynamic buttons when our app goes into the background state. We know when our app goes to the background by using the **.onChange** modifier with our **@Environment(\\.scenePhase) var lifeCycle** variable. For a deeper dive please check out the [Apple documentation](https://developer.apple.com/documentation/uikit/menus_and_shortcuts/add_home_screen_quick_actions).
+
+Now if we rerun our app and long press on our app icon we should see our static quick action button with our dynamic quick action buttons underneath. You may also notice that one of our quick buttons doesn't show up in the quick action sheet. This is because Apple will only show a maximum of 4 quick actions at a time.
+
+Next we will go back into our **addQuickActions()** function and add some more code.
+
+    func addQuickActions() {
+        var tweetuserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "tweet" as NSSecureCoding\]
+                }
+                var calluserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "call" as NSSecureCoding\]
+                }
+                var messageuserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "message" as NSSecureCoding\]
+                }
+                var saveduserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "saved" as NSSecureCoding\]
+                }
+        
+        UIApplication.shared.shortcutItems = \[
+            UIApplicationShortcutItem(type: "Tweet", localizedTitle: "Tweet", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .compose), userInfo: tweetuserInfo),
+            UIApplicationShortcutItem(type: "Call", localizedTitle: "Call", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .audio), userInfo: calluserInfo),
+            UIApplicationShortcutItem(type: "Message", localizedTitle: "Message", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .message), userInfo: messageuserInfo),
+            UIApplicationShortcutItem(type: "Saved", localizedTitle: "Saved", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .love), userInfo: saveduserInfo),
+        \]
+    }
+
+The example above will help us to identify each quick action button with a name key. This will allow us to know which of our quick actions was pressed this way we can have our app react according to what quick action the user has tapped. We will attach these new variables we created to the **userInfo** parameter of our **UIApplicationShortcutItem**. Above we also added icons to the shortcut items so we don't just have dots as icon placeholders.
+
+Now let's add two global variables above our **@main** in our **App** file. These variables will help us to pass our users input along to different areas of our app depending on which quick action we press.
+
+var shortcutItemToHandle: UIApplicationShortcutItem?
+let quickActionSettings = QuickActionSettings()
+
+Next we will need to add two more functions below our **addQuickActions()** function.
+
+    class AppDelegate: NSObject, UIApplicationDelegate {
+        func application(\_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+            if let shortcutItem = options.shortcutItem {
+                shortcutItemToHandle = shortcutItem
+            }
+            
+            let sceneConfiguration = UISceneConfiguration(name: "Custom Configuration", sessionRole: connectingSceneSession.role)
+            sceneConfiguration.delegateClass = CustomSceneDelegate.self
+            
+            return sceneConfiguration
+        }
+    }
+
+    class CustomSceneDelegate: UIResponder, UIWindowSceneDelegate {
+        func windowScene(\_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+            shortcutItemToHandle = shortcutItem
+        }
+    }
+
+In the code above we added an **Appdelegate** method and a **Scenedelegate** method to handle what happens to our quick action buttons at different parts of the life cycle of our app. What these two class methods are doing is handling if the app is closed we want it to open our application and if our app is in the background to handle a quick action if the user taps on it.
+
+Now that we have set up our quick action buttons we will want them to do something when a user taps on them. We want the user to be able to navigate to the specific section they tapped on in the home screen shortcut. This means that in our **newLifeCyclePhase** switch statement in our **.active** case we will need to perform an action. Let's take a look at how we implement this in the code below.
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environmentObject(quickActionSettings)
+        }
+        .onChange(of: lifeCycle) { (newLifeCyclePhase) in
+            switch newLifeCyclePhase {
+            case .active :
+                print("App is active")
+                guard let name = shortcutItemToHandle?.userInfo?\["name"\] as? String else { return }
+            case .inactive:
+                print("App is inactive")
+            case .background:
+                print("App is going to the Background")
+                // This will add our dynamic quick actions when our app is sent to the background on our device
+                addQuickActions()
+            @unknown default:
+                print("default")
+            }
+        }
+    }
+
+Above we added a **guard let** variable to our **.active** case. This will check to see if we have a name attached to the button the user pressed on the quick action shortcuts.
+
+Now that we set that up we will go into the **ContentView.swift** and we are going to make a simple list view that will correspond to our quick action dynamic buttons. This will also be where we setup a observable variable to see which button has been pressed from our App file and react by bringing our user to that view in the app.
+
+Our **ContentView.swift** file should have the following code in it.
+
+import SwiftUI
+
+struct ContentView: View {
+    @EnvironmentObject var quickActionSettings: QuickActionSettings
+    @State var selectedAction: Int?
+
+    var body: some View {
+            NavigationView {
+                List {
+                    ForEach(0..<allQuickActions.count) { index in
+                        NavigationLink(destination: DetailView(name: allQuickActions\[index\].name), tag: allQuickActions\[index\].tag, selection: $quickActionSettings.quickAction) {
+                            Text(allQuickActions\[index\].name)
+                        }
+                    }
+                }
+                .listStyle(SidebarListStyle())
+                .navigationBarTitle("Quick Actions")
+            }
+        }
+    
+}
+
+struct ContentView\_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+    struct QuickActionModel : Identifiable {
+        let id = UUID()
+        let name: String
+        let tag: QuickActionSettings.QuickAction
+    }
+
+    let allQuickActions = \[
+        QuickActionModel(name: "Tweet", tag: .details(name: "tweet")),
+        QuickActionModel(name: "Call",tag: .details(name: "call")),
+        QuickActionModel(name: "Message", tag: .details(name: "message")),
+        QuickActionModel(name: "Saved", tag: .details(name: "save")),
+    \]
+
+As you can see in the example we added a **@EnvironmentObject** to track which quick action our user has tapped from our quick actions on the home screen. We also setup a simple list view with all of our dynamic quick action buttons. We created a **QuickActionModel** struct with a name and a tag and created an array of quick actions so that we can segue to the detail view depending on which quick action was tapped.
+
+Next we will need to make a new SwiftUI file called **DetailView**. In this file add the following code to make a simple view for our list view buttons to segue too. This detail view will just show the name of the button we selected.
+
+import SwiftUI
+
+struct DetailView: View {
+    var name: String
+    
+    var body: some View {
+        Text("\\(name)!")
+            .navigationBarTitle(name)
+    }
+}
+
+Now we will make another swift file and name this one **QuickActionSettings**. This will be our observable object so we can keep track of which quick action was pressed.
+
+import Foundation
+
+class QuickActionSettings: ObservableObject {
+    
+    enum QuickAction: Hashable {
+        case home
+        case details(name: String)
+    }
+    
+    @Published var quickAction: QuickAction? = nil
+}
+
+Here we are using a **QuickAction** enum to see if the name value changes. If it does change it will trigger our navigation link in our content view to segue to the quick action the user has tapped.
+
+Lastly let's go back to our App file and add our **.enviormentObject** to our **ContentView()** in our WindowGroup like below.
+
+WindowGroup {
+            ContentView()
+                // We will use this modifier below to pass along which quick action that was pressed
+                .environmentObject(quickActionSettings)
+        }
+
+We also need to update our code inside of our **.active** case. Here we will add another switch statement that will check the names associated with our quick actions buttons. We will then take this name variable and pass it along our **quickActionSettings.quickAction** so the rest of our app can update. Our final **QuickActionSwuiftUIBlogApp** file should look like the code below.
+
+import SwiftUI
+
+let quickActionSettings = QuickActionSettings()
+var shortcutItemToHandle: UIApplicationShortcutItem?
+
+@main
+struct QuickActionSwuiftUIBlogApp: App {
+    @Environment(\\.scenePhase) var lifeCycle
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                // We will use this modifier below to pass along which quick action was pressed
+                .environmentObject(quickActionSettings)
+        }
+        .onChange(of: lifeCycle) { (newLifeCyclePhase) in
+            switch newLifeCyclePhase {
+            case .active :
+                print("App is active")
+                guard let name = shortcutItemToHandle?.userInfo?\["name"\] as? String else { return }
+                switch name {
+                               case "tweet":
+                                   print("tweet is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               case "call":
+                                   print("call is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               case "message":
+                                   print("message is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               case "saved":
+                                   print("saved is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               default:
+                                   print("default ")
+                               }
+            case .inactive:
+                print("App is inactive")
+            case .background:
+                print("App is going to the Background")
+                // This will add our dynamic quick actions when our app is sent to the background on our device
+                addQuickActions()
+            @unknown default:
+                print("default")
+            }
+        }
+    }
+    
+    func addQuickActions() {
+        var tweetuserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "tweet" as NSSecureCoding\]
+                }
+                var calluserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "call" as NSSecureCoding\]
+                }
+                var messageuserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "message" as NSSecureCoding\]
+                }
+                var saveduserInfo: \[String: NSSecureCoding\] {
+                    return \["name" : "saved" as NSSecureCoding\]
+                }
+        
+        UIApplication.shared.shortcutItems = \[
+            UIApplicationShortcutItem(type: "Tweet", localizedTitle: "Tweet", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .compose), userInfo: tweetuserInfo),
+            UIApplicationShortcutItem(type: "Call", localizedTitle: "Call", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .audio), userInfo: calluserInfo),
+            UIApplicationShortcutItem(type: "Message", localizedTitle: "Message", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .message), userInfo: messageuserInfo),
+            UIApplicationShortcutItem(type: "Saved", localizedTitle: "Saved", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .love), userInfo: saveduserInfo),
+        \]
+    }
+    
+    class AppDelegate: NSObject, UIApplicationDelegate {
+        func application(\_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+            if let shortcutItem = options.shortcutItem {
+                shortcutItemToHandle = shortcutItem
+            }
+            
+            let sceneConfiguration = UISceneConfiguration(name: "Custom Configuration", sessionRole: connectingSceneSession.role)
+            sceneConfiguration.delegateClass = CustomSceneDelegate.self
+            
+            return sceneConfiguration
+        }
+    }
+
+    class CustomSceneDelegate: UIResponder, UIWindowSceneDelegate {
+        func windowScene(\_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+            shortcutItemToHandle = shortcutItem
+        }
+    }
+}
+
+If we test our code on our home screen we should be able to long press our icon and if we tap one of the dynamic quick action buttons it will open our app and navigate to that specific section of our app.
+
+That is all you need to make home screen quick action shortcuts in SwiftUI.
+
+All the code can be found here on my [Github](https://github.com/Tprezioso/QuickActionSwiftUIBlog).
+
+I hope this helped you add quick actions to your next SwiftUI project.
+
+Happy Coding!
+</p></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/swiftui">SwiftUI</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta property="og:site_name" content="Another Swift Blog"/><link rel="canonical" href="https://tprezioso.github.io/posts/2021/2021-10-01-how-to-know-when-your-app-becomes-active-or-inactive-in-swiftui"/><meta name="twitter:url" content="https://tprezioso.github.io/posts/2021/2021-10-01-how-to-know-when-your-app-becomes-active-or-inactive-in-swiftui"/><meta property="og:url" content="https://tprezioso.github.io/posts/2021/2021-10-01-how-to-know-when-your-app-becomes-active-or-inactive-in-swiftui"/><title>How to Know When Your App Becomes Active or Inactive in SwiftUI | Another Swift Blog</title><meta name="twitter:title" content="How to Know When Your App Becomes Active or Inactive in SwiftUI | Another Swift Blog"/><meta property="og:title" content="How to Know When Your App Becomes Active or Inactive in SwiftUI | Another Swift Blog"/><meta name="description" content="Another Swift Blog"/><meta name="twitter:description" content="Another Swift Blog"/><meta property="og:description" content="Another Swift Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Another Swift Blog"/></head><body class="item-page"><header><img src="images/tom.jpg" class="author-avatar"/><div class="wrapper"><a href="/" class="site-name">Another Swift Blog</a><nav><ul><li><a href="/posts" class="selected">Posts</a></li><li><a href="/about">About</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>How to Know When Your App Becomes Active or Inactive in SwiftUI</h1><p>Recently I was working on a SwiftUI project were I needed to know when my app became active from being in the background. Like most things in SwiftUI, I found out that this was really simple to implement in my project.</p><p>In SwiftUI we have a environment element called <strong><a href="https://developer.apple.com/documentation/swiftui/scenephase">scenePhase</a></strong>. What <strong></strong><a href="https://developer.apple.com/documentation/swiftui/scenephase">scenePhase</a><strong></strong> allows us to do is monitor if the app is Active, Inactive, or in the Background. Lets take a look at how we can use this in our project.</p><p>The first thing we will need to do is add the following variable to your code:</p><pre><code><span class="keyword">@Environment</span>(\.<span class="property">scenePhase</span>) <span class="keyword">var</span> scenePhase
+</code></pre><p>This Environment variable is the key to monitoring what state your app is in. Next we will add an <strong>.onChange</strong> modifier to our view. This will allow us to see when our apps state has changed and then act on that change. Let’s now take a look at how I used the <strong></strong><a href="https://developer.apple.com/documentation/swiftui/scenephase">scenePhase</a><strong></strong> variable to reload a specific view when my app became active again.</p><pre><code><span class="keyword">struct</span> TodayWatchView: <span class="type">View</span> {
+    <span class="keyword">@StateObject var</span> viewModel = <span class="type">TodayWatchViewModel</span>()
+    
+    <span class="comment">// 1) added scenePhase variable</span>
+    <span class="keyword">@Environment</span>(\.<span class="property">scenePhase</span>) <span class="keyword">var</span> scenePhase
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">ZStack</span> {
+            <span class="type">VStack</span> {
+                <span class="keyword">if</span> !viewModel.<span class="property">isHolidaysEmpty</span> {
+                    <span class="type">List</span>(viewModel.<span class="property">holidays</span>) { holiday <span class="keyword">in
+                        if</span> holiday.<span class="property">url</span> == <span class="string">""</span> {
+                            <span class="type">Text</span>(<span class="string">"</span>\(holiday.<span class="property">name</span>)<span class="string">"</span>)
+                                .<span class="call">font</span>(.<span class="dotAccess">headline</span>)
+                                .<span class="call">bold</span>()
+                        } <span class="keyword">else</span> {
+                            <span class="type">NavigationLink</span>(holiday.<span class="property">name</span>, destination: <span class="type">HolidayWatchDetailView</span>(holiday: holiday))
+                        }
+                    }
+                } <span class="keyword">else</span> {
+                    <span class="type">EmptyState</span>(message: <span class="string">"There was an issue loading Today's Holidays!\n Try again later"</span>)
+                }
+            }
+            
+            <span class="comment">// 2)
+            // Reload data when app becomes active!!</span>
+            .<span class="call">onChange</span>(of: scenePhase) { newPhase <span class="keyword">in
+                if</span> newPhase == .<span class="dotAccess">inactive</span> {
+                    <span class="call">print</span>(<span class="string">"Inactive"</span>)
+                } <span class="keyword">else if</span> newPhase == .<span class="dotAccess">active</span> {
+                    viewModel.<span class="call">getHolidays</span>()
+                } <span class="keyword">else if</span> newPhase == .<span class="dotAccess">background</span> {
+                    <span class="call">print</span>(<span class="string">"Background"</span>)
+                }
+            }
+            .<span class="call">navigationTitle</span>(<span class="string">"Today Is...."</span>)
+            .<span class="call">alert</span>(item: <span class="property">$viewModel</span>.<span class="property">alertItem</span>) { alertItem <span class="keyword">in</span>
+                <span class="type">Alert</span>.<span class="keyword">init</span>(title: alertItem.<span class="property">title</span>, message: alertItem.<span class="property">message</span>, dismissButton: alertItem.<span class="property">dismissButton</span>)
+            }
+            .<span class="call">onAppear</span> {
+                viewModel.<span class="call">getHolidays</span>()
+            }
+            <span class="keyword">if</span> viewModel.<span class="property">isLoading</span> {
+                <span class="type">ProgressView</span>()
+                    .<span class="call">progressViewStyle</span>(<span class="type">CircularProgressViewStyle</span>(tint: .<span class="dotAccess">gray</span>))
+                    .<span class="call">scaleEffect</span>(<span class="number">2</span>, anchor: .<span class="dotAccess">center</span>)
+            }
+        }
+    }
+}
+</code></pre><p>I hope this gives you a better understanding of how you can monitor your app and run functions depending on your apps state.</p><p>Thanks for reading and happy coding!!! 👨🏻‍💻👨🏻‍💻👨🏻‍💻</p></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/swiftui">SwiftUI</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>

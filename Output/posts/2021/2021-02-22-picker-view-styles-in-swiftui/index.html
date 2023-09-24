@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta property="og:site_name" content="Another Swift Blog"/><link rel="canonical" href="https://tprezioso.github.io/posts/2021/2021-02-22-picker-view-styles-in-swiftui"/><meta name="twitter:url" content="https://tprezioso.github.io/posts/2021/2021-02-22-picker-view-styles-in-swiftui"/><meta property="og:url" content="https://tprezioso.github.io/posts/2021/2021-02-22-picker-view-styles-in-swiftui"/><title>"Picker View Styles in SwiftUI" | Another Swift Blog</title><meta name="twitter:title" content=""Picker View Styles in SwiftUI" | Another Swift Blog"/><meta property="og:title" content=""Picker View Styles in SwiftUI" | Another Swift Blog"/><meta name="description" content="Another Swift Blog"/><meta name="twitter:description" content="Another Swift Blog"/><meta property="og:description" content="Another Swift Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Another Swift Blog"/></head><body class="item-page"><header><img src="images/tom.jpg" class="author-avatar"/><div class="wrapper"><a href="/" class="site-name">Another Swift Blog</a><nav><ul><li><a href="/posts" class="selected">Posts</a></li><li><a href="/about">About</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>Picker View Styles in SwiftUI</h1><p>In this post we are going to take a look at the different ways we can style a picker view in our SwiftUI project. Let's first setup a simple picker view like in the example below.</p><pre><code>     <span class="keyword">var</span> arrayOfNames = [<span class="string">"Tom"</span>, <span class="string">"Nick"</span>, <span class="string">"Tony"</span>, <span class="string">"Dylan"</span>]
+    <span class="keyword">@State private var</span> selectedIndex = <span class="number">0</span>
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">Picker</span>(<span class="string">"Names"</span>, selection: <span class="property">$selectedIndex</span>) {
+            <span class="type">ForEach</span>(<span class="number">0</span> ..&lt; arrayOfNames.<span class="property">count</span>) {
+                <span class="type">Text</span>(<span class="keyword">self</span>.<span class="property">arrayOfNames</span>[$0])
+            }
+        }
+    }
+}
+</code></pre><img src="/images/Simulator-Screen-Shot-iPod-touch-7th-generation-2021-02-19-at-17.19.09-577x1024.png"/><p>Above we created a basic picker view with four names to choose from. Now let us change the style of our picker to be included in a <strong>Form</strong>.</p><pre><code>     <span class="keyword">var</span> arrayOfNames = [<span class="string">"Tom"</span>, <span class="string">"Nick"</span>, <span class="string">"Tony"</span>, <span class="string">"Dylan"</span>]
+    <span class="keyword">@State private var</span> selectedIndex = <span class="number">0</span>
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">NavigationView</span> {
+            <span class="type">Form</span> {
+                <span class="type">Picker</span>(<span class="string">"Names"</span>, selection: <span class="property">$selectedIndex</span>) {
+                    <span class="type">ForEach</span>(<span class="number">0</span> ..&lt; arrayOfNames.<span class="property">count</span>) {
+                        <span class="type">Text</span>(<span class="keyword">self</span>.<span class="property">arrayOfNames</span>[$0])
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre><ul><li><img src="/images/Simulator-Screen-Shot-iPhone-12-2021-02-21-at-11.05.49-1-473x1024.png"/><ul></ul></li></ul><ul><li><img src="/images/Simulator-Screen-Shot-iPhone-12-2021-02-21-at-11.05.54-1-473x1024.png"/><ul></ul></li></ul><p>In the example above is wrapped our code in a <strong>NavigationView</strong> and a <strong>Form</strong>. This changes our picker view style so that it segues us to another view to make our selection. This is great for a picker that has many options to choose from. But let's say we didn't want to segue to another view to see our options.</p><p>Let's see how we can implement a segmented picker view style.</p><pre><code>     <span class="keyword">var</span> arrayOfNames = [<span class="string">"Tom"</span>, <span class="string">"Nick"</span>, <span class="string">"Tony"</span>, <span class="string">"Dylan"</span>]
+    <span class="keyword">@State private var</span> selectedIndex = <span class="number">0</span>
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">NavigationView</span> {
+            <span class="type">Form</span> {
+                <span class="type">Picker</span>(<span class="string">"Names"</span>, selection: <span class="property">$selectedIndex</span>) {
+                    <span class="type">ForEach</span>(<span class="number">0</span> ..&lt; arrayOfNames.<span class="property">count</span>) {
+                        <span class="type">Text</span>(<span class="keyword">self</span>.<span class="property">arrayOfNames</span>[$0])
+                    }
+                }.<span class="call">pickerStyle</span>(<span class="type">SegmentedPickerStyle</span>())
+            }
+        }
+    }
+</code></pre><img src="/images/Simulator-Screen-Shot-iPhone-12-2021-02-21-at-11.14.46-473x1024.png"/><p>By just adding <strong>.pickerStyle(SegmentedPickerStyle())</strong> to our picker view, SwiftUI gives us a segmented style picker view with minimal change to our code.</p><p>Let's say we don't want either of these styles. What if we wanted a picker view like we originally had in our first example. We can easily do this by switching our picker style to <strong>.pickerStyle(</strong>WheelPickerStyle<strong>())</strong>.</p><img src="/images/Simulator-Screen-Shot-iPhone-12-2021-02-21-at-11.20.45-473x1024.png"/><p>I hope this helps you in your next SwiftUI Project.</p><p>Thanks for reading and happy coding! ⛏⛏⛏</p></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/swiftui">SwiftUI</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>

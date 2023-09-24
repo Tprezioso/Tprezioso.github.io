@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta property="og:site_name" content="Another Swift Blog"/><link rel="canonical" href="https://tprezioso.github.io/posts/2021/2021-01-11-how-to-fetch-json-data-from-apis-in-swiftui"/><meta name="twitter:url" content="https://tprezioso.github.io/posts/2021/2021-01-11-how-to-fetch-json-data-from-apis-in-swiftui"/><meta property="og:url" content="https://tprezioso.github.io/posts/2021/2021-01-11-how-to-fetch-json-data-from-apis-in-swiftui"/><title>"How to Fetch JSON Data from APIs in SwiftUI" | Another Swift Blog</title><meta name="twitter:title" content=""How to Fetch JSON Data from APIs in SwiftUI" | Another Swift Blog"/><meta property="og:title" content=""How to Fetch JSON Data from APIs in SwiftUI" | Another Swift Blog"/><meta name="description" content="Another Swift Blog"/><meta name="twitter:description" content="Another Swift Blog"/><meta property="og:description" content="Another Swift Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Another Swift Blog"/></head><body class="item-page"><header><img src="images/tom.jpg" class="author-avatar"/><div class="wrapper"><a href="/" class="site-name">Another Swift Blog</a><nav><ul><li><a href="/posts" class="selected">Posts</a></li><li><a href="/about">About</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>How to Fetch JSON Data from APIs in SwiftUI</h1><p>In this post we are going to take a look at how we can get JSON data from an API and show it in a list view in SwiftUI. Let's jump right in a get started by creating a new SwiftUI project.</p><p>In this project we are going to be using the <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a> API. <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a> is a free to use fake <strong>REST API</strong> for testing and prototyping.</p><p>We will be fetching our data from the <strong><em>https://jsonplaceholder.typicode.com/posts/1/comments</em></strong> URL.</p><p>Now in our Xcode project we will create a model file and name it <strong>Comments</strong>. This will be our model for the data we are going to want to show in our list view.</p><pre><code><span class="keyword">import</span> SwiftUI
+
+<span class="keyword">struct</span> Comments: <span class="type">Codable</span>, <span class="type">Identifiable</span> {
+    <span class="keyword">let</span> id = <span class="type">UUID</span>()
+    <span class="keyword">let</span> name: <span class="type">String</span>
+    <span class="keyword">let</span> email: <span class="type">String</span>
+    <span class="keyword">let</span> body: <span class="type">String</span>
+    
+}
+</code></pre><p>In the code above we made a simple struct that conforms to the <a href="https://developer.apple.com/documentation/swift/codable">Codable</a> and <a href="https://developer.apple.com/documentation/swift/identifiable">Identifiable</a> protocols. <a href="https://developer.apple.com/documentation/swift/codable">Codable</a> is used for decoding and encoding the JSON data we get from our API call. <a href="https://developer.apple.com/documentation/swift/identifiable">Identifiable</a> is used to help us make a unique identifier for our <strong>Comments</strong> object so our app can keep track of it. In our example it helps us to keep track of our comments and display them in the right order for our list view. We also have added the <strong>name</strong>, <strong>email</strong>, and <strong>body</strong> properties that will be set to the JSON data we get back from our API call.</p><p>Next we will add a new file where we will create the call to our API to get our JSON data. Let's start by creating a new file and naming it <strong>commentViewModel</strong>. Then we will add the following code to our <strong>commentViewModel</strong> file.</p><pre><code><span class="keyword">import</span> Foundation
+
+<span class="keyword">class</span> apiCall {
+    <span class="keyword">func</span> getUserComments(completion:<span class="keyword">@escaping</span> ([<span class="type">Comments</span>]) -&gt; ()) {
+        <span class="keyword">guard let</span> url = <span class="type">URL</span>(string: <span class="string">"https://jsonplaceholder.typicode.com/posts/1/comments"</span>) <span class="keyword">else</span> { <span class="keyword">return</span> }
+        
+        <span class="type">URLSession</span>.<span class="property">shared</span>.<span class="call">dataTask</span>(with: url) { (data, <span class="keyword">_</span>, <span class="keyword">_</span>) <span class="keyword">in
+            let</span> comments = <span class="keyword">try</span>! <span class="type">JSONDecoder</span>().<span class="call">decode</span>([<span class="type">Comments</span>].<span class="keyword">self</span>, from: data!)
+            <span class="call">print</span>(comments)
+            
+            <span class="type">DispatchQueue</span>.<span class="property">main</span>.<span class="call">async</span> {
+                <span class="call">completion</span>(comments)
+            }
+        }
+        .<span class="call">resume</span>()
+    }
+}
+</code></pre><p>Above all we did was create a class called <strong>apiCall</strong> and added a function called <strong>getUserComments()</strong>. In our <strong>getUserComments()</strong> function we first make a <strong>guard let</strong> statement on our <strong>url</strong> variable. This is to check to make sure we have a valid URL otherwise the function will stop there and not execute the rest of the code.</p><p>Next we use <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a> to make our call to get the data from the URL. Inside of our <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a> closure we create a new variable called <strong>comments</strong> and we assign the decoded JSON to our variable. Then we use <strong><a href="https://developer.apple.com/documentation/dispatch/dispatchqueue">DispatchQueue</a></strong> to make sure we are running this API call on the main thread and not a background thread of our app. On completion of retrieving our data we then assigns the data to our comments variable. Lastly we can't forget the <strong>.resume()</strong> function at the end of your <a href="https://developer.apple.com/documentation/foundation/urlsession">URLSession</a> curly brace. If you forget this the function will never run the API call to the URL.</p><p>Now that we have our view model setup lets go into <strong>ContentView</strong> file and add the following code to our file.</p><pre><code><span class="keyword">import</span> SwiftUI
+
+<span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+    <span class="comment">//1.</span>
+    <span class="keyword">@State var</span> comments = [<span class="type">Comments</span>]()
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="type">NavigationView</span> {
+            <span class="comment">//3.</span>
+            <span class="type">List</span>(comments) { comment <span class="keyword">in</span>
+                <span class="type">VStack</span>(alignment: .<span class="dotAccess">leading</span>) {
+                    <span class="type">Text</span>(comment.<span class="property">name</span>)
+                        .<span class="call">font</span>(.<span class="dotAccess">title</span>)
+                        .<span class="call">fontWeight</span>(.<span class="dotAccess">bold</span>)
+                    <span class="type">Text</span>(comment.<span class="property">email</span>)
+                        .<span class="call">font</span>(.<span class="dotAccess">subheadline</span>)
+                        .<span class="call">fontWeight</span>(.<span class="dotAccess">bold</span>)
+                    <span class="type">Text</span>(comment.<span class="property">body</span>)
+                        .<span class="call">font</span>(.<span class="dotAccess">body</span>)
+                }
+                
+            }
+            <span class="comment">//2.</span>
+            .<span class="call">onAppear</span>() {
+                <span class="call">apiCall</span>().<span class="call">getUserComments</span> { (comments) <span class="keyword">in
+                    self</span>.<span class="property">comments</span> = comments
+                }
+            }.<span class="call">navigationTitle</span>(<span class="string">"Comments"</span>)
+        }
+    }
+}
+</code></pre><ol><li>First we created a <strong>@State</strong> variable that takes in an array of our <strong>Comments</strong> model.</li><li>Next we added the <strong>.<a href="https://developer.apple.com/documentation/swiftui/text/onappear(perform:)">onAppear</a>()</strong> function. This is were we make our call to our API to get our data and then set it to the <strong>comments</strong> variable we just created.</li><li>Then in our list view we pass in the data that we have in our <strong>Comments</strong> array</li></ol><p>Now we can go and run our app. We should see something like the image below.</p><img src="https://swifttom.com/wp-content/uploads/2021/01/simulator-screen-shot-iphone-12-pro-2021-01-08-at-16.39.36.png?w=473"/><p>Thats all we need to fetch and show JSON data in SwiftUI. Thanks for reading!</p><p>Happy Coding!</p><img src="/images/giphy.gif?cid=ecf05e47eve0t94gcjgizod66y2n5j54arndqtk30lp9cibk&rid=giphy.gif" alt="data numbers GIF"/></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/swiftui">SwiftUI</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>
