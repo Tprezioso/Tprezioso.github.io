@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta property="og:site_name" content="Another Swift Blog"/><link rel="canonical" href="https://tprezioso.github.io/posts/2020/2020-02-12-how-to-make-a-image-carousel-in-swiftui"/><meta name="twitter:url" content="https://tprezioso.github.io/posts/2020/2020-02-12-how-to-make-a-image-carousel-in-swiftui"/><meta property="og:url" content="https://tprezioso.github.io/posts/2020/2020-02-12-how-to-make-a-image-carousel-in-swiftui"/><title>"How to Make a Image Carousel in SwiftUI" | Another Swift Blog</title><meta name="twitter:title" content=""How to Make a Image Carousel in SwiftUI" | Another Swift Blog"/><meta property="og:title" content=""How to Make a Image Carousel in SwiftUI" | Another Swift Blog"/><meta name="description" content="Another Swift Blog"/><meta name="twitter:description" content="Another Swift Blog"/><meta property="og:description" content="Another Swift Blog"/><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Another Swift Blog"/></head><body class="item-page"><header><img src="images/tom.jpg" class="author-avatar"/><div class="wrapper"><a href="/" class="site-name">Another Swift Blog</a><nav><ul><li><a href="/posts" class="selected">Posts</a></li><li><a href="/about">About</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><div class="content"><h1>How to Make a Image Carousel in SwiftUI</h1><p>Today we are going to learn how to make an image carousel for displaying images in your app. Image carousels are a great way to show your user multiple images with only using a small amount of screen real estate.</p><p>To start lets create a new Xcode project and in your ContentView.swift file add the following boilerplate code.</p><p>struct ContentView: View { var body: some View { ScrollView { // ImageCarouselView Will Go Here.<br> VStack(alignment: .leading, spacing: 10) { HStack { Image("swiftTom") .resizable() .scaledToFill() .frame(width: 55, height: 55) .clipShape(Circle()) .shadow(radius: 4)<br> VStack(alignment: .leading) { Text("Written By") .foregroundColor(.gray) Text("Thomas Prezioso Jr") } }<br> Text("Feb 10 2020") .foregroundColor(.gray)<br> Text("How to Make a Image Carousel in SwiftUI") .bold()<br> Text(loremIpsum) .lineLimit(nil) } .padding(.horizontal) .padding(.top, 16.0) }.edgesIgnoringSafeArea(.all) } }</p><p>let loremIpsum = """ Lorem ipsum dolor sit amet consectetur adipiscing elit donec, gravida commodo hac non mattis augue duis vitae inceptos, laoreet taciti at vehicula cum arcu dictum. Cras netus vivamus sociis pulvinar est erat, quisque imperdiet velit a justo maecenas, pretium gravida ut himenaeos nam. Tellus quis libero sociis class nec hendrerit, id proin facilisis praesent bibendum vehicula tristique, fringilla augue vitae primis turpis. """</p><p>Above is just some boilerplate code to setup our app. If you run the app right now you will see we just added a picture with some text (Feel free to use any image you want in throughout this example. I am using some pictures that I had downloaded on my desktop of some baby huskies 😅).</p><p>Later we will add our Carousel View in between the ScrollView and the VStack in the ContentView file.</p><p>Now we are going to create a new SwiftUI file and name it ImageCarouselView. Then add the following code to our new ImageCarouselView.swift file.</p><p>import SwiftUI import Combine</p><p>struct ImageCarouselView<Content: View>: View {
+    private var numberOfImages: Int
+    private var content: Content
+
+    @State private var currentIndex: Int = 0
+    
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+
+    init(numberOfImages: Int, @ViewBuilder content: () -> Content) {
+        self.numberOfImages = numberOfImages
+        self.content = content()
+    }
+
+    var body: some View {
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                self.content
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
+            .offset(x: CGFloat(self.currentIndex) \* -geometry.size.width, y: 0)
+            .animation(.spring())
+            .onReceive(self.timer) { \_ in
+                
+                self.currentIndex = (self.currentIndex + 1) % 3
+            }
+        }
+    }
+}
+
+First we import SwiftUI and Combine.
+
+Next we make a Struct called ImageCarouselView.
+
+After that we added a variable called **content** which makes a reference to what images are going to be displayed. We also added a variable to keep track of the number of images we want to display with the **numberOfImages** variable.
+
+Then we added a **@State** variable to keep track of our current index of which image is to be shown.
+
+We also made a **timer** variable that every 3 seconds will automatically fire and queue the next image to appear on screen.
+
+Next we created a custom init that will take in the number of images and image content variables. (The **ViewBuilder** you see in our parameters allows us to create a custom view container to render our view)
+
+Inside the body we added a **GeometryReader**. We need the **GeometryReader** to get the parent view's frame.
+
+We then used a HStack that will hold our images we want to display. We set the HStack spacing to 0 so the edges of each image will line up.
+
+Next we added the **self.content** to display our image.
+
+Then we set the frame for our HStack to the width and height of the parent view this way we only show one image at a time.
+
+We created a **.offset** that takes in the currentIndex variable and multiplies it by negative value of the parents width to get our new offset. This will allow the next image to slide into the same space where the first image was previously.
+
+We also added a spring animation so that the transition isn't rough or make the user feel like the app is broken.
+
+And lastly we added **.onReceive** which takes in the **timer** so it knows to switch the image every 3 seconds and also updates the current range with a simple module operator. This keeps our range of images in between 0 - 2.
+
+Now we can go back to our ContentView file and add the following code right under our Scrollview in the body.
+
+GeometryReader { geometry in
+                ImageCarouselView(numberOfImages: 3) {
+                    Image("husky-1")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                    Image("husky-2")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                    Image("husky-3")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                }
+            }.frame(height: 300, alignment: .center)
+
+What's happening above is we create a **GeometryReader** and then call our custom init to get our image carousel. We create 3 child views of the parent that are all images.
+
+We then set the images with resizable, scaledToFill, and set the frame to the parent view frame.
+
+And that's pretty much all there is to it. If you build and run you should see the 3 images moving every 3 seconds followed by the boilerplate text we started with.
+
+![](https://swifttom.com/wp-content/uploads/2020/02/carouselforblog.gif?w=496)
+
+🎉 Congrats! 🎉 We made a awesome Image Carousel! I hope this article helped you! Happy Programming! 👨🏻‍💻👨🏻‍💻👨🏻‍💻
+</p></div><span>Tagged with: </span><ul class="tag-list"><li><a href="/tags/swift">Swift</a></li><li><a href="/tags/swiftui">SwiftUI</a></li></ul></article></div><footer><p>Generated using <a href="https://github.com/johnsundell/publish">Publish</a></p><p><a href="/feed.rss">RSS feed</a></p></footer></body></html>
